@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  id: 1
+  nasadata: one
+  showDescription: false
+  likes: 1
+  liked: false
+
+two:
+  id: 1
+  nasadata: two
+  showDescription: false
+  likes: 1
+  liked: false

@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  nasadata_id: 1
+  copyright: MyString
+  explanation: MyString
+  hdurl: MyString
+  media_type: MyString
+  service_version: MyString
+  title: MyString
+  url: MyString
+
+two:
+  nasadata_id: 1
+  copyright: MyString
+  explanation: MyString
+  hdurl: MyString
+  media_type: MyString
+  service_version: MyString
+  title: MyString
+  url: MyString

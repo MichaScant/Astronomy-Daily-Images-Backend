@@ -1,0 +1,2 @@
+class NasaData < ApplicationRecord
+end

@@ -1,0 +1,2 @@
+class UsersNasaDataObject < ApplicationRecord
+end

@@ -3,38 +3,33 @@ class Api::V1::NasaDataController < ApplicationController
 
   #Get /faviourites
   def index
-      @data = NasaData.all
-      render json: @data
+    @data = NasaData.all
+    render json: @data
   end
 
   def show
+    @ids = params[:id].split(",").map(&:to_i)
+    @data_all = []
+    @ids.each{ |id|
+        @data = nil
+        begin
+            @data = NasaData.find(id)
+        rescue ActiveRecord::RecordNotFound
+            @data = {message: "Favourite does not exist"}
+        end
 
-        @ids = params[:id].split(",").map(&:to_i)
+        @data_all.append({id: id, data: @data})
+    }
 
-        @dataAll = []
-        @ids.each{ |id|
-            @data = nil;
-
-            begin
-                @data = NasaData.find(id);
-            rescue ActiveRecord::RecordNotFound
-                @data = {message: "Favourite does not exist"}
-            end
-
-            @dataAll.append({id: id, data: @data})
-
-        }
-
-        render json: @dataAll
+    render json: @data_all
   end
 
   def create
-      @data = NasaData.new(data_params)
-      if (@data.save)
-          render json: @data
-      else
-          render error: {error: "Error occured, unable to add new favourite"}, status:400
-      end
+    @data = NasaData.new(data_params)
+    render json: @data if @data.save
+    else
+        render error: {error: "Error occured, unable to add new favourite"}, status:400
+    end
   end
 
   def update
@@ -48,13 +43,13 @@ class Api::V1::NasaDataController < ApplicationController
   end
 
   def destroy
-      @data = NasaData.find(params[:id])
-      if (@data)
-          @data.destroy
-          render json: {message: "Removed Favourite"}, status:200
-      else
-          render json: {message: "Favourite does not exist"}, status:200
-      end
+    @data = NasaData.find(params[:id])
+    if @data
+        @data.destroy
+        render json: {message: "Removed Favourite"}, status:200
+    else
+        render json: {message: "Favourite does not exist"}, status:200
+    end
   end
 
   private

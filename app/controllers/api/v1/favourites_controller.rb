@@ -15,8 +15,7 @@ class Api::V1::FavouritesController < ApplicationController
   #POST
   def create
       @favourite = Favourite.new(user_params)
-      if (@favourite.save)
-          render json: @favourite
+      render json: @favourite if @favourite.save
       else
           render error: {error: "Error occured, unable to add new favourite"}, status:400
       end

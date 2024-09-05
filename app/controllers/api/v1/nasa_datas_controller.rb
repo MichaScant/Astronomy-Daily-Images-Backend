@@ -14,10 +14,7 @@ class Api::V1::NasaDatasController < ApplicationController
 
   def create
       @data = UsersNasaDataObject.new(data_params)
-      puts "TEST"
-      puts @data
-      if (@data.save)
-          render json: @data
+      render json: @data if @data.save
       else
           render error: {error: "Error occured, unable to add new favourite"}, status:400
       end
@@ -35,7 +32,7 @@ class Api::V1::NasaDatasController < ApplicationController
 
   def destroyd
       @data = UsersNasaDataObject.find(params[:id])
-      if (@data)
+      if @data
           @data.destroy
           render json: {message: "Removed Favourite"}, status:200
       else

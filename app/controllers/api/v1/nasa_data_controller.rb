@@ -26,7 +26,8 @@ class Api::V1::NasaDataController < ApplicationController
 
   def create
     @data = NasaData.new(data_params)
-    render json: @data if @data.save
+    if @data.save
+        render json: @data
     else
         render error: {error: "Error occured, unable to add new favourite"}, status:400
     end
